@@ -1,12 +1,5 @@
-/// <reference path="./interfaces.d.ts"/>
+import {Utils} from './utils';
 
-import {Utils} from "./utils";
-
-// Generic "model" object. You can use whatever
-// framework you want. For this application it
-// may not even be worth separating this logic
-// out, but we do this to demonstrate one way to
-// separate out parts of your application.
 class TodoModel implements ITodoModel {
 
     public key: string;
