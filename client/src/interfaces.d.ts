@@ -26,11 +26,10 @@ interface ITodoFooterProps {
   count : number;
 }
 
-
 interface ITodoModel {
   key : any;
-  todos : Array<ITodo>;
-  onChanges : Array<any>;
+  todos : ITodo[];
+  onChanges : any[];
   subscribe(onChange);
   inform();
   addTodo(title : string);

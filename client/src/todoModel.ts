@@ -3,8 +3,8 @@ import {Utils} from './utils';
 class TodoModel implements ITodoModel {
 
     public key: string;
-    public todos: Array<ITodo>;
-    public onChanges: Array<any>;
+    public todos: ITodo[];
+    public onChanges: any[];
 
     constructor(key: string) {
         this.key = key;
@@ -18,22 +18,20 @@ class TodoModel implements ITodoModel {
 
     public inform() {
         Utils.store(this.key, this.todos);
-        this.onChanges.forEach(function (cb) {
-            cb();
-        });
+        this.onChanges.forEach((cb) => cb());
     }
 
     public addTodo(title: string) {
         this.todos = this.todos.concat({
             id: Utils.uuid(),
-            title: title,
+            title,
             completed: false
         });
 
         this.inform();
     }
 
-    public toggleAll(checked: Boolean) {
+    public toggleAll(checked: boolean) {
         // Note: It's usually better to use immutable data structures since they're
         // easier to reason about and React works very well with them. That's why
         // we use map(), filter() and reduce() everywhere instead of mutating the
@@ -56,26 +54,18 @@ class TodoModel implements ITodoModel {
     }
 
     public destroy(todo: ITodo) {
-        this.todos = this.todos.filter(function (candidate) {
-            return candidate !== todo;
-        });
-
+        this.todos = this.todos.filter((candidate) => candidate !== todo);
         this.inform();
     }
 
     public save(todoToSave: ITodo, text: string) {
-        this.todos = this.todos.map(function (todo) {
-            return todo !== todoToSave ? todo : Utils.extend({}, todo, {title: text});
-        });
-
+        this.todos = this.todos.map((todo) =>
+            todo !== todoToSave ? todo : Utils.extend({}, todo, {title: text}));
         this.inform();
     }
 
     public clearCompleted() {
-        this.todos = this.todos.filter(function (todo) {
-            return !todo.completed;
-        });
-
+        this.todos = this.todos.filter((todo) => !todo.completed);
         this.inform();
     }
 }

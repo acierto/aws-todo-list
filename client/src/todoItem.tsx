@@ -1,14 +1,16 @@
-import classNames from "classnames";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import {ENTER_KEY, ESCAPE_KEY} from "./constants";
+import classNames from 'classnames';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {ENTER_KEY, ESCAPE_KEY} from './constants';
 
 class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
 
     public state: ITodoItemState;
+    private editFieldRef: React.RefObject<HTMLInputElement>;
 
     constructor(props: ITodoItemProps) {
         super(props);
+        this.editFieldRef = React.createRef<HTMLInputElement>();
         this.state = {editText: this.props.todo.title};
     }
 
@@ -64,7 +66,7 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
      */
     public componentDidUpdate(prevProps: ITodoItemProps) {
         if (!prevProps.editing && this.props.editing) {
-            var node = (ReactDOM.findDOMNode(this.refs["editField"]) as HTMLInputElement);
+            const node = (ReactDOM.findDOMNode(this.refs.editField) as HTMLInputElement);
             node.focus();
             node.setSelectionRange(node.value.length, node.value.length);
         }
@@ -76,25 +78,25 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
                 completed: this.props.todo.completed,
                 editing: this.props.editing
             })}>
-                <div className="view">
+                <div className='view'>
                     <input
-                        className="toggle"
-                        type="checkbox"
+                        className='toggle'
+                        type='checkbox'
                         checked={this.props.todo.completed}
                         onChange={this.props.onToggle}
                     />
-                    <label onDoubleClick={() => this.handleEdit()}>
+                    <label onDoubleClick={this.handleEdit}>
                         {this.props.todo.title}
                     </label>
-                    <button className="destroy" onClick={this.props.onDestroy}/>
+                    <button className='destroy' onClick={this.props.onDestroy}/>
                 </div>
                 <input
-                    ref="editField"
-                    className="edit"
+                    className='edit'
+                    ref={this.editFieldRef}
                     value={this.state.editText}
-                    onBlur={e => this.handleSubmit(e)}
-                    onChange={e => this.handleChange(e)}
-                    onKeyDown={e => this.handleKeyDown(e)}
+                    onBlur={this.handleSubmit}
+                    onChange={this.handleChange}
+                    onKeyDown={this.handleKeyDown}
                 />
             </li>
         );

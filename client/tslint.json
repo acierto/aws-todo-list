@@ -24,6 +24,7 @@
         "trace"
       ]
     },
+    "interface-name": false,
     "quotemark": [
       true,
       "single"
