@@ -1,1 +1,1 @@
-declare module 'director';
+declare module 'director/build/director';

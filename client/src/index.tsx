@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import TodoApp from './TodoApp';
-import {TodoModel} from './todoModel';
+import TodoApp from './todo-app';
+import {TodoModel} from './todo-model';
 
 const model = new TodoModel('react-todos');
 

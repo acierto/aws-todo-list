@@ -1,7 +1,7 @@
 import * as React from 'react';
-// import director from 'director';
+import {Router} from 'director/build/director';
 import {TodoFooter} from './footer';
-import {TodoItem} from './todoItem';
+import {TodoItem} from './todo-item';
 import {ACTIVE_TODOS, ALL_TODOS, COMPLETED_TODOS, ENTER_KEY} from './constants';
 
 class TodoApp extends React.Component<IAppProps, IAppState> {
@@ -19,14 +19,17 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
     }
 
     public componentDidMount() {
-        // var setState = this.setState;
-        // var router = director.http.Router({
-        //   '/': setState.bind(this, {nowShowing: ALL_TODOS}),
-        //   '/active': setState.bind(this, {nowShowing: ACTIVE_TODOS}),
-        //   '/completed': setState.bind(this, {nowShowing: COMPLETED_TODOS})
-        // });
-        // router.init('/');
+        this.createRouter();
     }
+
+    createRouter = () => {
+        const router = Router({
+            '/': () => this.setState({nowShowing: ALL_TODOS}),
+            '/active': () => this.setState({nowShowing: ACTIVE_TODOS}),
+            '/completed': () => this.setState({nowShowing: COMPLETED_TODOS})
+        });
+        router.init('/');
+    };
 
     handleNewTodoKeyDown = (event: React.KeyboardEvent) => {
         if (event.keyCode !== ENTER_KEY) {
