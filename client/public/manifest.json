@@ -1,0 +1,9 @@
+{
+  "short_name": "AWS TODO list",
+  "name": "AWS TODO list",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
