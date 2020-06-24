@@ -1,12 +1,11 @@
 class Utils {
     public static uuid(): string {
         let i;
-        let random;
         let uuid = '';
 
         for (i = 0; i < 32; i++) {
             // tslint:disable-next-line:no-bitwise
-            random = Math.random() * 16 | 0;
+            const random = Math.random() * 16 | 0;
             if (i === 8 || i === 12 || i === 16 || i === 20) {
                 uuid += '-';
             }
