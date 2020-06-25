@@ -29,18 +29,6 @@ class Utils {
         const store = localStorage.getItem(namespace);
         return (store && JSON.parse(store)) || [];
     }
-
-    public static extend(...objs: any[]): any {
-        const newObj: any = {};
-        for (const obj of objs) {
-            for (const key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    newObj[key] = obj[key];
-                }
-            }
-        }
-        return newObj;
-    }
 }
 
 export {Utils};

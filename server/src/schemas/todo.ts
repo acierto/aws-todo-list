@@ -6,5 +6,8 @@ export default class Todo {
     id: number;
 
     @Field()
-    note: string;
+    title: string;
+
+    @Field()
+    completed: boolean;
 }

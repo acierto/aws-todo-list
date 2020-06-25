@@ -16,13 +16,13 @@ export default class {
     }
 
     @Mutation(_ => Todo)
-    createTodo(
-        @Arg('todoInfo') {note}: TodoInput
-    ): TodoData[] {
+    createTodo(@Arg('input') {title}: TodoInput): TodoData[] {
         const id = todos.length + 1;
-        return todos.concat({
+        todos.push({
             id,
-            note
-        });
+            title,
+            completed: false
+        })
+        return todos;
     }
 }

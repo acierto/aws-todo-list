@@ -37,7 +37,7 @@ class TodoModel implements ITodoModel {
         // we use map(), filter() and reduce() everywhere instead of mutating the
         // array or todo items themselves.
         this.todos = this.todos.map<ITodo>((todo: ITodo) => {
-            return Utils.extend({}, todo, {completed: checked});
+            return {...todo, completed: checked};
         });
 
         this.inform();
@@ -45,9 +45,7 @@ class TodoModel implements ITodoModel {
 
     public toggle(todoToToggle: ITodo) {
         this.todos = this.todos.map<ITodo>((todo: ITodo) => {
-            return todo !== todoToToggle ?
-                todo :
-                Utils.extend({}, todo, {completed: !todo.completed});
+            return todo !== todoToToggle ? todo : {...todo, completed: !todo.completed};
         });
 
         this.inform();
@@ -60,7 +58,7 @@ class TodoModel implements ITodoModel {
 
     public save(todoToSave: ITodo, text: string) {
         this.todos = this.todos.map((todo) =>
-            todo !== todoToSave ? todo : Utils.extend({}, todo, {title: text}));
+            todo !== todoToSave ? todo : {...todo, title: text});
         this.inform();
     }
 

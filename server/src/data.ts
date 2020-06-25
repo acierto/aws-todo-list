@@ -1,8 +1,9 @@
 export interface TodoData {
     id: number;
-    note: string;
+    title: string;
+    completed: boolean;
 }
 
 export const todos: TodoData[] = [
-    {id: 1, note: 'Welcome!'}
+    {id: 1, title: 'Welcome!', completed: false}
 ];

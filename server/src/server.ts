@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import {ApolloServer} from 'apollo-server-express';
 import Express from 'express';
 import 'reflect-metadata';
@@ -12,14 +13,11 @@ async function startServer() {
 
     const app = Express();
 
-    const server = new ApolloServer({
-        schema
-    });
-
+    const server = new ApolloServer({schema});
     server.applyMiddleware({app});
 
     app.listen(4000, () =>
-        console.log('Server is running on http://localhost:4000/graphql')
+        log.info('Server is running on http://localhost:4000/graphql')
     );
 }
 
