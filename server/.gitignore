@@ -1,2 +1,8 @@
 dist/
 node_modules/
+aws-todo-list-server.zip
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

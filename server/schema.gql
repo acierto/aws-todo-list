@@ -4,7 +4,7 @@
 # -----------------------------------------------
 
 type Mutation {
-  createTodo(input: TodoInput!): [Todo!]!
+  createTodo(todoInfo: TodoInput!): [Todo!]!
 }
 
 type Query {
@@ -14,10 +14,9 @@ type Query {
 
 type Todo {
   id: Int!
-  title: String!
-  completed: Boolean!
+  note: String!
 }
 
 input TodoInput {
-  title: String!
+  note: String!
 }
