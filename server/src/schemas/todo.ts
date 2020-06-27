@@ -1,9 +1,9 @@
-import {Field, Int, ObjectType} from 'type-graphql';
+import {Field, ObjectType} from 'type-graphql';
 
 @ObjectType()
 export default class Todo {
-    @Field(_ => Int)
-    id: number;
+    @Field()
+    id: string;
 
     @Field()
     title: string;

@@ -9,13 +9,13 @@ export enum Filter {
 registerEnumType(Filter, {name: 'Filter'});
 
 export interface TodoData {
-    id: number;
+    id: string;
     title: string;
     completed: boolean;
 }
 
 const todos: TodoData[] = [
-    {id: 1, title: 'Welcome!', completed: false}
+    {id: '1', title: 'Welcome!', completed: false}
 ];
 
 export let params = {filter: Filter.SHOW_ALL, todos};

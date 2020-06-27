@@ -1,6 +1,7 @@
 dist/
 node_modules/
 aws-todo-list-server.zip
+.db-files
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

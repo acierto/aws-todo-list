@@ -19,14 +19,14 @@ export default class {
     }
 
     @Query(_ => Todo, {nullable: true})
-    todoByID(@Arg('id') id: number): TodoData | undefined {
+    todoByID(@Arg('id') id: string): TodoData | undefined {
         return params.todos.find(todo => todo.id === id);
     }
 
     @Mutation(_ => Todo)
     addTodo(@Arg('title') title: string): TodoData[] {
         const {todos} = params;
-        const id = todos.length + 1;
+        const id = `${todos.length + 1}`;
         todos.push({
             id,
             title,
@@ -36,21 +36,21 @@ export default class {
     }
 
     @Mutation(_ => Todo)
-    removeTodo(@Arg('id') id: number): TodoData[] {
+    removeTodo(@Arg('id') id: string): TodoData[] {
         const {todos} = params;
         params.todos = todos.filter((todo) => todo.id !== id);
         return params.todos;
     }
 
     @Mutation(_ => Todo)
-    toggleTodo(@Arg('id') id: number): TodoData[] {
+    toggleTodo(@Arg('id') id: string): TodoData[] {
         const {todos} = params;
         params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, completed: !todo.completed} : todo);
         return params.todos;
     }
 
     @Mutation(_ => Todo)
-    modifyTodo(@Arg('id') id: number, @Arg('title') title: string): TodoData[] {
+    modifyTodo(@Arg('id') id: string, @Arg('title') title: string): TodoData[] {
         const {todos} = params;
         params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, title} : todo);
         return params.todos;
