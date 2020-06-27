@@ -30,7 +30,7 @@
     "typescript-tslint-plugin": "^0.5.5"
   },
   "scripts": {
-    "start": "REACT_APP_STAGE=dev react-scripts start",
+    "start": "PORT=3005 REACT_APP_STAGE=dev react-scripts start",
     "build": "PUBLIC_URL=. react-scripts build",
     "deploy": "aws s3 sync build s3://acierto-bucket",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix --format verbose",
