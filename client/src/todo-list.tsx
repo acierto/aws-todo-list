@@ -15,17 +15,13 @@ export const ALL_TODOS_GQL = gql`
 `;
 
 export const REMOVE_TODO_GQL = gql`
-    mutation removeTodo($id: Float!) {
-        removeTodo(id: $id) {
-            id
-            title
-            completed
-        }
+    mutation removeTodo($id: String!) {
+        removeTodo(id: $id)
     }
 `;
 
 export const TOGGLE_TODO_GQL = gql`
-    mutation toggleTodo($id: Float!) {
+    mutation toggleTodo($id: String!) {
         toggleTodo(id: $id) {
             id
             title
@@ -35,7 +31,7 @@ export const TOGGLE_TODO_GQL = gql`
 `;
 
 export const MODIFY_TODO_GQL = gql`
-    mutation modifyTodo($id: Float!, $title: String!) {
+    mutation modifyTodo($id: String!, $title: String!) {
         modifyTodo(id: $id, title: $title) {
             id
             title

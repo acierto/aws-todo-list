@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc && node --inspect ./dist/server.js",
+    "dev": "tsc && env NODE_ENV=dev env DB_URL=http://localhost:8000 node --inspect ./dist/server.js",
     "start": "node --inspect ./dist/server.js",
-    "nodemon-dev": "nodemon --exec ts-node src/server.ts",
+    "nodemon-dev": "env NODE_ENV=dev env DB_URL=http://localhost:8000 nodemon --exec ts-node src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,12 +26,15 @@
     "typescript-tslint-plugin": "^0.5.5"
   },
   "dependencies": {
+    "apollo-datasource-dynamodb": "^1.0.2",
     "apollo-server": "^2.15.0",
     "apollo-server-express": "^2.15.0",
+    "aws-sdk": "^2.706.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "graphql": "^14.1.1",
     "graphql-tools": "^6.0.10",
+    "guid-typescript": "^1.0.9",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.6"

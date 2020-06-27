@@ -10,16 +10,16 @@ enum Filter {
 }
 
 type Mutation {
-  addTodo(title: String!): [Todo!]!
-  removeTodo(id: String!): [Todo!]!
-  toggleTodo(id: String!): [Todo!]!
-  modifyTodo(title: String!, id: String!): [Todo!]!
+  addTodo(title: String!): Todo!
+  removeTodo(id: String!): Boolean!
+  toggleTodo(id: String!): Todo!
+  modifyTodo(title: String!, id: String!): Todo!
   setFilter(filter: Float!): Filter!
 }
 
 type Query {
   todos: [Todo!]!
-  todoByID(id: String!): Todo
+  todoByID(id: String!): [Todo!]
 }
 
 type Todo {

@@ -1,12 +1,14 @@
 import {Arg, Mutation, Query, Resolver} from 'type-graphql';
+import {Guid} from 'guid-typescript';
 import {Filter, params, TodoData} from '../data';
 import Todo from '../schemas/todo';
+import {findTodo, listTodos, removeTodo, saveTodo, updateTodo} from '../database/database';
 
 @Resolver(_ => Todo)
 export default class {
-    @Query(_ => Todo)
-    todos(): TodoData[] {
-        const {todos} = params;
+    @Query(_ => [Todo])
+    async todos(): Promise<TodoData[]> {
+        const todos = await listTodos();
         if (params.filter === Filter.SHOW_COMPLETED) {
             return todos.filter(t => t.completed);
         }
@@ -18,42 +20,42 @@ export default class {
         return todos;
     }
 
-    @Query(_ => Todo, {nullable: true})
-    todoByID(@Arg('id') id: string): TodoData | undefined {
-        return params.todos.find(todo => todo.id === id);
+    @Query(_ => [Todo], {nullable: true})
+    async todoByID(@Arg('id') id: string): Promise<TodoData | undefined> {
+        return findTodo(id);
     }
 
     @Mutation(_ => Todo)
-    addTodo(@Arg('title') title: string): TodoData[] {
-        const {todos} = params;
-        const id = `${todos.length + 1}`;
-        todos.push({
-            id,
+    async addTodo(@Arg('title') title: string): Promise<TodoData> {
+        const todo = {
+            id: Guid.create().toString(),
             title,
             completed: false
-        })
-        return todos;
+        };
+        await saveTodo(todo);
+        return todo;
+    }
+
+    @Mutation(_ => Boolean)
+    async removeTodo(@Arg('id') id: string): Promise<boolean> {
+        await removeTodo(id);
+        return true;
     }
 
     @Mutation(_ => Todo)
-    removeTodo(@Arg('id') id: string): TodoData[] {
-        const {todos} = params;
-        params.todos = todos.filter((todo) => todo.id !== id);
-        return params.todos;
+    async toggleTodo(@Arg('id') id: string): Promise<TodoData> {
+        const todo: TodoData = await findTodo(id);
+        const updatedTodo = {...todo, completed: !todo.completed};
+        updateTodo(updatedTodo);
+        return updatedTodo;
     }
 
     @Mutation(_ => Todo)
-    toggleTodo(@Arg('id') id: string): TodoData[] {
-        const {todos} = params;
-        params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, completed: !todo.completed} : todo);
-        return params.todos;
-    }
-
-    @Mutation(_ => Todo)
-    modifyTodo(@Arg('id') id: string, @Arg('title') title: string): TodoData[] {
-        const {todos} = params;
-        params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, title} : todo);
-        return params.todos;
+    async modifyTodo(@Arg('id') id: string, @Arg('title') title: string): Promise<TodoData> {
+        const todo: TodoData = await findTodo(id);
+        const updatedTodo = {...todo, title};
+        updateTodo(updatedTodo);
+        return updatedTodo;
     }
 
     @Mutation(_ => Filter)
