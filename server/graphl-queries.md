@@ -13,7 +13,8 @@
 
 ```graphql
 mutation{
-  createTodo(input:{title:"My title"}) {
+  addTodo(title:"title") {
+    id
     title
   }
 }

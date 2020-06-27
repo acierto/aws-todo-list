@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Router} from 'director/build/director';
-import {TodoFooter} from './footer';
-import {TodoItem} from './todo-item';
 import {ACTIVE_TODOS, ALL_TODOS, COMPLETED_TODOS, ENTER_KEY} from './constants';
+import {TodoList} from './todo-list';
 
 class TodoApp extends React.Component<IAppProps, IAppState> {
 
@@ -84,47 +83,47 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
         let main;
         const todos = this.props.model.todos;
 
-        const shownTodos = todos.filter((todo) => {
-            switch (this.state.nowShowing) {
-                case ACTIVE_TODOS:
-                    return !todo.completed;
-                case COMPLETED_TODOS:
-                    return todo.completed;
-                default:
-                    return true;
-            }
-        });
+        // const shownTodos = todos.filter((todo) => {
+        //     switch (this.state.nowShowing) {
+        //         case ACTIVE_TODOS:
+        //             return !todo.completed;
+        //         case COMPLETED_TODOS:
+        //             return todo.completed;
+        //         default:
+        //             return true;
+        //     }
+        // });
 
-        const todoItems = shownTodos.map((todo) => {
-            return (
-                <TodoItem
-                    key={todo.id}
-                    todo={todo}
-                    onToggle={this.toggle.bind(this, todo)}
-                    onDestroy={this.destroy.bind(this, todo)}
-                    onEdit={this.edit.bind(this, todo)}
-                    editing={this.state.editing === todo.id}
-                    onSave={this.save.bind(this, todo)}
-                    onCancel={this.cancel}
-                />
-            );
-        });
+        // const todoItems = shownTodos.map((todo) => {
+        //     return (
+        //         <TodoItem
+        //             key={todo.id}
+        //             todo={todo}
+        //             onToggle={this.toggle.bind(this, todo)}
+        //             onDestroy={this.destroy.bind(this, todo)}
+        //             onEdit={this.edit.bind(this, todo)}
+        //             editing={this.state.editing === todo.id}
+        //             onSave={this.save.bind(this, todo)}
+        //             onCancel={this.cancel}
+        //         />
+        //     );
+        // });
 
-        const activeTodoCount = todos.reduce((accum, todo) =>
+        const activeTodoCount = todos.reduce((accum: number, todo: ITodo) =>
                 todo.completed ? accum : accum + 1
             , 0);
 
         const completedCount = todos.length - activeTodoCount;
 
-        if (activeTodoCount || completedCount) {
-            footer =
-                <TodoFooter
-                    count={activeTodoCount}
-                    completedCount={completedCount}
-                    nowShowing={this.state.nowShowing}
-                    onClearCompleted={this.clearCompleted}
-                />;
-        }
+        // if (activeTodoCount || completedCount) {
+        //     footer =
+        //         <TodoFooter
+        //             count={activeTodoCount}
+        //             completedCount={completedCount}
+        //             nowShowing={this.state.nowShowing}
+        //             onClearCompleted={this.clearCompleted}
+        //         />;
+        // }
 
         if (todos.length) {
             main = (
@@ -141,9 +140,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
                     >
                         Mark all as complete
                     </label>
-                    <ul className='todo-list'>
-                        {todoItems}
-                    </ul>
+                    <TodoList/>
                 </section>
             );
         }

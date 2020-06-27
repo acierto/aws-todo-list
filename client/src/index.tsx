@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoApp from './todo-app';
+import App from './app';
 import {TodoModel} from './todo-model';
 import ApolloClient, {InMemoryCache} from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
@@ -16,7 +16,7 @@ const client = new ApolloClient({
 
 const render = () => ReactDOM.render(
     <ApolloProvider client={client}>
-        <TodoApp model={model} />
+        <App />
     </ApolloProvider>,
     document.getElementById('root')
 );

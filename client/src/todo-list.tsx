@@ -3,16 +3,17 @@ import {gql} from 'apollo-boost'
 import {TodoItem} from './todo-item';
 import * as React from 'react';
 
+// tslint:disable-next-line:no-empty-interface
 interface IPorps {
-    loading: boolean;
-    model: ITodoModel;
+    // loading: boolean;
+    // model: ITodoModel;
 }
 
-const ALL_TODOS = gql`
+export const ALL_TODOS_GQL = gql`
     query {
         todos {
             id
-            text
+            title
             completed
         }
     }
@@ -20,11 +21,12 @@ const ALL_TODOS = gql`
 
 const doNothing = () => ({});
 
-const TodoList: React.FC<IPorps> = (): JSX.Element => {
-    const {data} = useQuery(ALL_TODOS);
+export const TodoList: React.FC<IPorps> = (): JSX.Element => {
+    const {data} = useQuery(ALL_TODOS_GQL);
+    const todos = data ? data.todos : [];
 
     return <ul className='todo-list'>
-        {data.todos.map((todo: ITodo) => {
+        {todos.map((todo: ITodo) => {
             return (
                 <TodoItem
                     key={todo.id}
@@ -40,5 +42,3 @@ const TodoList: React.FC<IPorps> = (): JSX.Element => {
         })}
     </ul>;
 };
-
-export default TodoList;

@@ -21,7 +21,6 @@ interface ITodoItemState {
 
 interface ITodoFooterProps {
   completedCount : number;
-  onClearCompleted : any;
   nowShowing? : string;
   count : number;
 }
