@@ -23,7 +23,6 @@ export const AddTodo: React.FC = (): JSX.Element => {
         if (event.keyCode !== ENTER_KEY) {
             return;
         }
-
         event.preventDefault();
 
         const {current} = newTodoRef;

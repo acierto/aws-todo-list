@@ -11,11 +11,9 @@ const client = new ApolloClient({
     cache
 });
 
-const render = () => ReactDOM.render(
+ReactDOM.render(
     <ApolloProvider client={client}>
-        <App />
+        <App/>
     </ApolloProvider>,
     document.getElementById('root')
 );
-
-render();
