@@ -1,11 +1,12 @@
 import {Arg, Mutation, Query, Resolver} from 'type-graphql';
-import {Filter, params, TodoData, todos} from '../data';
+import {Filter, params, TodoData} from '../data';
 import Todo from '../schemas/todo';
 
 @Resolver(_ => Todo)
 export default class {
     @Query(_ => Todo)
     todos(): TodoData[] {
+        const {todos} = params;
         if (params.filter === Filter.SHOW_COMPLETED) {
             return todos.filter(t => t.completed);
         }
@@ -19,11 +20,12 @@ export default class {
 
     @Query(_ => Todo, {nullable: true})
     todoByID(@Arg('id') id: number): TodoData | undefined {
-        return todos.find(todo => todo.id === id);
+        return params.todos.find(todo => todo.id === id);
     }
 
     @Mutation(_ => Todo)
     addTodo(@Arg('title') title: string): TodoData[] {
+        const {todos} = params;
         const id = todos.length + 1;
         todos.push({
             id,
@@ -31,6 +33,27 @@ export default class {
             completed: false
         })
         return todos;
+    }
+
+    @Mutation(_ => Todo)
+    removeTodo(@Arg('id') id: number): TodoData[] {
+        const {todos} = params;
+        params.todos = todos.filter((todo) => todo.id !== id);
+        return params.todos;
+    }
+
+    @Mutation(_ => Todo)
+    toggleTodo(@Arg('id') id: number): TodoData[] {
+        const {todos} = params;
+        params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, completed: !todo.completed} : todo);
+        return params.todos;
+    }
+
+    @Mutation(_ => Todo)
+    modifyTodo(@Arg('id') id: number, @Arg('title') title: string): TodoData[] {
+        const {todos} = params;
+        params.todos = todos.map((todo: TodoData) => todo.id === id ? {...todo, title} : todo);
+        return params.todos;
     }
 
     @Mutation(_ => Filter)

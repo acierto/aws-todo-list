@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import {Utils} from './utils';
 import {Filter} from './constants';
 import {Router} from 'director/build/director';
 import {useEffect} from 'react';
@@ -25,7 +24,7 @@ export const Footer: React.FC<IProps> = ({count, completedCount, currentFilter, 
         router.init('/');
     }, []);
 
-    const activeTodoWord = Utils.pluralize(count, 'item');
+    const activeTodoWord = count === 1 ? 'item' : 'items';
 
     if (completedCount > 0) {
         const clear = () => updateFilter(Filter.SHOW_ALL);

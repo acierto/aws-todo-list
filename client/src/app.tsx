@@ -13,7 +13,7 @@ const SET_FILTER_GQL = gql`
 `;
 
 const App: React.FC = () => {
-    const {loading, data} = useQuery(ALL_TODOS_GQL);
+    const {data} = useQuery(ALL_TODOS_GQL);
     const [currentFilter, setCurrentFilter] = useState(Filter.SHOW_ALL);
     const todos = data ? data.todos : [];
 
@@ -39,7 +39,7 @@ const App: React.FC = () => {
                     <h1>todos</h1>
                     <AddTodo/>
                 </header>
-                <TodoList {...{loading, data}} />
+                <TodoList/>
                 <Footer
                     count={activeTodoCount}
                     completedCount={completedCount}

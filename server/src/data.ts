@@ -14,8 +14,8 @@ export interface TodoData {
     completed: boolean;
 }
 
-export const todos: TodoData[] = [
+const todos: TodoData[] = [
     {id: 1, title: 'Welcome!', completed: false}
 ];
 
-export let params = { filter: Filter.SHOW_ALL };
+export let params = {filter: Filter.SHOW_ALL, todos};

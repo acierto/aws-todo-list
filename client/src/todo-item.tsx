@@ -16,7 +16,7 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     handleSubmit = () => {
         const val = this.state.editText.trim();
         if (val) {
-            this.props.onSave(val);
+            this.props.onSave(this.props.todo.id, val);
             this.setState({editText: val});
         } else {
             this.props.onDestroy();

@@ -1,14 +1,14 @@
 interface ITodo {
-  id: string,
+  id: number,
   title: string,
   completed: boolean
 }
 
 interface ITodoItemProps {
-  key : string,
+  key : number,
   todo : ITodo;
   editing? : boolean;
-  onSave: (val: any) => void;
+  onSave: (id: number, title: string) => void;
   onDestroy: () => void;
   onEdit: ()  => void;
   onCancel: (event : any) => void;
