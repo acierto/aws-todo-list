@@ -1,6 +1,6 @@
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
-const GRAPHQL_URL = 'http://localhost:4000/graphql';
+const GRAPHQL_URL = 'http://aws-todo-list-server-env.eba-6tg2as6i.eu-west-1.elasticbeanstalk.com/graphql';
 
 enum Filter {
     SHOW_ALL,
