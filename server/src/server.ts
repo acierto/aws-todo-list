@@ -16,8 +16,10 @@ async function startServer() {
     const server = new ApolloServer({schema});
     server.applyMiddleware({app});
 
-    app.listen(process.env.PORT || 4000, () =>
-        log.info('Server is running on http://localhost:4000/graphql')
+    const port = process.env.PORT || 4000;
+
+    app.listen(port, () =>
+        log.info(`Server is running on http://localhost:${port}/graphql`)
     );
 }
 
