@@ -7,3 +7,8 @@ yarn start
 ```shell script
 yarn build && aws s3 sync build s3://acierto-bucket
 ```
+
+## Demo
+
+http://acierto-bucket.s3-website-eu-west-1.amazonaws.com
+
