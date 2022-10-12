@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "apollo-datasource-dynamodb": "^1.0.2",
-    "apollo-server": "^2.15.0",
+    "apollo-server": "^2.25.4",
     "apollo-server-express": "^2.15.0",
     "aws-sdk": "^2.706.0",
     "body-parser": "^1.19.0",
